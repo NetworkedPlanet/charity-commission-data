@@ -1,0 +1,20 @@
+Notes on the tables:
+
+extract_charity:
+    [regno] = Registration number
+    [subno] = Subsidiary / constituent charity number (assigned starting from 1, parent has subno 0)
+    [orgtype] = R = registerd, RM = removed
+    [gd] = Governing document (text reference to the document)
+    [aob] = area of benefit
+    [aob_defined] = not sure that this one is used - there are only blanks
+    [nhs] = ?? there only is F
+    [ha_no] = ?? No rows with a value
+    [corr] = contact name
+    [addr1-5] = address
+    
+Charity:
+    http://data.networkedplanet.com/data/charity_commission/charity/{regno}[.{subno}] a schema:Organization, ont:Charity
+    [char] schema:parentOrganization [http://data.networkedplanet.com/data/charity_commission/charity/{regno}] (if subno > 0)
+    [http://data.networkedplanet.com/data/charity_commission/charity/{regno}] schema:subOrganization [char]  (if subno > 0)
+    [char] ont:removed = True | False
+    [char] ont:governingDocument = {gd}
