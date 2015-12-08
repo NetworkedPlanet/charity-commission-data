@@ -131,23 +131,28 @@ def parse_tsv(tsv_file):
 
 
 def sir_to_csv(tsv_path, csv_path):
+    with open(csv_path, 'w', newline='', encoding='utf-8') as csv_file:
+        data_writer = csv.writer(csv_file)
+        for r in parse_sir(tsv_path):
+            data_writer.writerow(r)
+
+
+def parse_sir(tsv_path):
     with open(tsv_path, 'r', encoding='iso-8859-1', newline='\r\n') as tsv_file:
-        with open(csv_path, 'w', newline='', encoding='utf-8') as csv_file:
-            data_writer = csv.writer(csv_file)
-            expected_cell_count = 0
-            line_no = 0
-            for r in parse_tsv(tsv_file):
-                line_no += 1
-                if expected_cell_count == 0:
-                    expected_cell_count = len(r)
-                elif len(r) > expected_cell_count:
-                    # print('WARN: Merging overflow cells: {0}', r)
-                    merged_cell = '\t'.join(r[expected_cell_count - 1:])
-                    r = list(r[:expected_cell_count - 2])
-                    r.append(merged_cell)
-                elif len(r) != expected_cell_count:
-                    print('ERROR: Invalid line (there may be a bad CR/LF pair in preceding cell data')
-                data_writer.writerow(r)
+        expected_cell_count = 0
+        line_no = 0
+        for r in parse_tsv(tsv_file):
+            line_no += 1
+            if expected_cell_count == 0:
+                expected_cell_count = len(r)
+            elif len(r) > expected_cell_count:
+                # print('WARN: Merging overflow cells: {0}', r)
+                merged_cell = '\t'.join(r[expected_cell_count - 1:])
+                r = list(r[:expected_cell_count - 2])
+                r.append(merged_cell)
+            elif len(r) != expected_cell_count:
+                print('ERROR: Invalid line (there may be a bad CR/LF pair in preceding cell data')
+            yield r
 
 
 def convert_to_csv(source_dir, target_dir):
@@ -246,6 +251,11 @@ def convert_to_rdf(source_dir, target_dir):
     #     convert_trustee
     # )
 
+    sir_to_rdf(
+        os.path.join(source_dir, 'sir_data.bcp'),
+        os.path.join(target_dir, 'sir_data.ttl'))
+
+
 def write_prefixes(f):
     for prefix, uri in PREFIXES.items():
         f.write('@prefix {}: <{}> .\n'.format(prefix, uri))
@@ -291,6 +301,48 @@ def join_continuation_strings(arry):
         if arry[i][-4:] == '0001':
             arry[i] = arry[i][:-4]
     return ''.join(arry)
+
+
+def sir_to_rdf(bcp_path, rdf_path):
+    if os.path.exists(rdf_path):
+        print('RDF file already exists at {}. Skipping.'.format(rdf_path))
+        return
+    print('Convert from {} to {}'.format(bcp_path, rdf_path))
+    last_id = None
+    questions_described = {}
+    with open(rdf_path, 'w', encoding='utf-8') as rdf_file:
+        write_prefixes(rdf_file)
+        for row in parse_sir(bcp_path):
+            if len(row) < 6 or len(row) > 7:
+                print('Skipping row with unexpected number of columns: {} (expected 6 or 7)'.format(len(row)))
+                continue
+            charity_id = charity_iri(row[0], '0')
+            # charity_name = row[1] -- NOT USED HERE
+            return_cycle = row[2]
+            return_cycle_id = '<{}sirCycle/{}>'.format(PREFIXES['charity'], row[2])
+            question_number = row[3]
+            question_id = '<{}/summaryInformationQuestion/{}/{}>'.format(PREFIXES['charity'], return_cycle, question_number)
+            return_id = '<{}{}/summaryInformationReturn/{}>'.format(PREFIXES['charity'], row[0], return_cycle)
+            response_id = '<{}{}/summaryInformationResponse/{}/{}>'.format(PREFIXES['charity'], row[0], return_cycle, question_number)
+            if return_id != last_id:
+                rdf_file.write('{} a ont:SummaryInformationReturn\n'.format(return_id))
+                rdf_file.write('\t; ont:submittedBy {}\n'.format(charity_id))
+                rdf_file.write('\t; ont:sirCycle {}\n'.format(return_cycle_id))
+                rdf_file.write('\t.\n')
+            if question_number not in questions_described:
+                rdf_file.write('{} a ont:summaryInformationQuestion\n'.format(question_id))
+                rdf_file.write('\t;ont:questionText "{}"\n'.format(escape_string(row[4])))
+                rdf_file.write('\t.\n')
+            rdf_file.write('{} a ont:SummaryInformationResponse\n'.format(response_id))
+            rdf_file.write('\t;ont:question {}\n'.format(question_id))
+            if len(row[5]) > 0:
+                if len(row) == 6:
+                    rdf_file.write('\t;ont:responseText "{}"\n'.format(escape_string(row[5])))
+                else:
+                    rdf_file.write('\t;ont:responseText "{}"\n'.format(escape_string(row[5] + '\r' + row[6])))
+            else:
+                rdf_file.write('\t;ont:responseText "{}"\n'.format(escape_string(row[6])))
+            rdf_file.write('\t.\n')
 
 
 def turtle_conversion(bcp_path, rdf_path, conversion_function):
