@@ -29,9 +29,13 @@
  
     python cc_convert.py rdf [path to source directory] [path to output directory]
  
+ NOTE: The converter is written to skip conversion where an output file already exists. To force reconversion,
+ specify an empty (or non-existent) directory as the output path.
+ 
 ## Ontology
 
-TBD
+An ontology description is provided in the ontology.ttl file. Although this is an OWL file the ontology 
+pretty much restricts itself to simple RDF Schema domain/range statements. 
 
 ## About the data
 
@@ -50,3 +54,7 @@ WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FI
 
 Please see the text file named COPYING in this repository for the full text of the license. IF for any reason you 
 do not have that file, the full text of the license is available at http://www.gnu.org/licenses/
+
+## Spotted An Error ?
+
+Please let us know by filing an issue on GitHub at https://github.com/NetworkedPlanet/charity-commission-data/issues
