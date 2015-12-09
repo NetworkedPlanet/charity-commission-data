@@ -330,7 +330,7 @@ def sir_to_rdf(bcp_path, rdf_path):
                 rdf_file.write('\t; ont:sirCycle {}\n'.format(return_cycle_id))
                 rdf_file.write('\t.\n')
             if question_number not in questions_described:
-                rdf_file.write('{} a ont:summaryInformationQuestion\n'.format(question_id))
+                rdf_file.write('{} a ont:SummaryInformationQuestion\n'.format(question_id))
                 rdf_file.write('\t;ont:questionText "{}"\n'.format(escape_string(row[4])))
                 rdf_file.write('\t.\n')
             rdf_file.write('{} a ont:SummaryInformationResponse\n'.format(response_id))
@@ -409,7 +409,7 @@ def convert_account_submissions(bcp_file, rdf_file):
             acct_id = '<{}{}/accounts/{}>'.format(PREFIXES['charity'], row[0], row[2])
             submit_id = '<{}{}/accounts/{}/submission>'.format(PREFIXES['charity'], row[0], row[2])
             cycle_id = '<{}returnCycle/{}>'.format(PREFIXES['charity'], row[2])
-            rdf_file.write('{} a ont:accountsSubmission\n'.format(submit_id))
+            rdf_file.write('{} a ont:AccountsSubmission\n'.format(submit_id))
             rdf_file.write('\t; ont:submissionDate {}'.format(datetime_to_date_iri(row[1])))
             rdf_file.write('\t; ont:submittedAccounts {}.\n'.format(acct_id))
             rdf_file.write('{} a ont:FinancialAccounts\n'.format(acct_id))
@@ -424,11 +424,12 @@ def convert_ar_submissions(bcp_file, rdf_file):
             return_id = '<{}{}/annualReturn/{}>'.format(PREFIXES['charity'], row[0], row[1])
             submit_id = '<{}{}/annualReturn/{}/submission>'.format(PREFIXES['charity'], row[0], row[1])
             cycle_id = '<{}returnCycle/{}>'.format(PREFIXES['charity'], row[1])
-            rdf_file.write('{} a ont:annualReturnSubmission\n'.format(submit_id))
+            rdf_file.write('{} a ont:AnnualReturnSubmission\n'.format(submit_id))
             rdf_file.write('\t; ont:submissionDate {}\n'.format(datetime_to_date_iri(row[2])))
-            rdf_file.write('\t; ont:returnCycle {}\n'.format(cycle_id))
             rdf_file.write('\t; ont:submittedReturn {} .\n'.format(return_id))
-            rdf_file.write('{} a ont:AnnualReturn .\n'.format(return_id))
+            rdf_file.write('{} a ont:AnnualReturn\n'.format(return_id))
+            rdf_file.write('\t; ont:returnCycle {}\n'.format(cycle_id))
+            rdf_file.write('\t;.\n')
 
 
 def convert_aoo(bcp_file, rdf_file):
@@ -455,7 +456,7 @@ def convert_charity_aoo(bcp_file, rdf_file):
         area_type = row[1]
         area = "area:{}{}".format(row[1], row[2])
         master = row[4]
-        rdf_file.write("{} ont:areaOfBenefit {}.\n".format(charity, area))
+        rdf_file.write("{} ont:areaOfOperation {}.\n".format(charity, area))
         if master is not None:
             if area_type == 'D':
                 # Master hold continent ref
@@ -478,6 +479,7 @@ def convert_class_ref(bcp_file, rdf_file):
     for row in parse_bcp(bcp_file):
         cls = "class:" + row[0]
         label = escape_string(row[1])
+        rdf_file.write('{} a ont:CharitablePurposeClass.'.format(cls))
         rdf_file.write('{} rdfs:label "{}" .\n'.format(cls, label))
 
 
@@ -625,6 +627,7 @@ def convert_partb(bcp_file, rdf_file):
             'ont:fixedInvestmentsAssetsYearStart',
             'ont:currentInvestmentsAssets',
             'ont:cashAssets',
+            'ont:currentAssets',
             'ont:creditors',
             'ont:longTermCreditors',
             'ont:pensionAssets',
