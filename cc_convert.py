@@ -282,16 +282,18 @@ def parse_datetime(s, fmt="%Y-%m-%d %H:%M:%S"):
     return datetime.datetime.strptime(s.strip(), fmt)
 
 
-def date_to_iri(s, fmt="%Y-%m-%d"):
-    try:
-        dt = datetime.datetime.strptime(s.strip(), fmt)
-        return dt.strftime("<http://reference.data.gov.uk/id/day/%Y-%m-%d>")
-    except ValueError as e:
-        print('Failed to parse date: {} - {}'.format(s, e))
+def datetime_to_xsd_datetime(s, fmt="%Y-%m-%d %H:%M:%S"):
+    """
+    Parse s to a Python datetime object and then serialize it in the lexical representation
+    specified by the XML Schema datatypes spec. Currently the whole thorny issue of timezone
+    is obviated by omitting the timezone from the returned timestamp string!
 
-
-def year_to_iri(year):
-    return "<http://reference.data.gov.uk/id/year/{}>".format(year)
+    :param s:
+    :param fmt:
+    :return:
+    """
+    dt = parse_datetime(s, fmt)
+    return dt.strftime('%Y-%m-%dT%H:%M:%S')
 
 
 def join_continuation_strings(arry):
@@ -411,6 +413,7 @@ def convert_account_submissions(bcp_file, rdf_file):
             cycle_id = '<{}returnCycle/{}>'.format(PREFIXES['charity'], row[2])
             rdf_file.write('{} a ont:AccountsSubmission\n'.format(submit_id))
             rdf_file.write('\t; ont:submissionDate {}'.format(datetime_to_date_iri(row[1])))
+            rdf_file.write('\t; ont:submissionTimestamp "{}"^^xsd:dateTime'.format(datetime_to_xsd_datetime(row[1])))
             rdf_file.write('\t; ont:submittedAccounts {}.\n'.format(acct_id))
             rdf_file.write('{} a ont:FinancialAccounts\n'.format(acct_id))
             rdf_file.write('\t; ont:returnCycle {}\n'.format(cycle_id))
@@ -426,6 +429,7 @@ def convert_ar_submissions(bcp_file, rdf_file):
             cycle_id = '<{}returnCycle/{}>'.format(PREFIXES['charity'], row[1])
             rdf_file.write('{} a ont:AnnualReturnSubmission\n'.format(submit_id))
             rdf_file.write('\t; ont:submissionDate {}\n'.format(datetime_to_date_iri(row[2])))
+            rdf_file.write('\t; ont:submissionTimestamp "{}"^^xsd:dateTime\n'.format(datetime_to_xsd_datetime(row[2])))
             rdf_file.write('\t; ont:submittedReturn {} .\n'.format(return_id))
             rdf_file.write('{} a ont:AnnualReturn\n'.format(return_id))
             rdf_file.write('\t; ont:returnCycle {}\n'.format(cycle_id))
@@ -479,8 +483,9 @@ def convert_class_ref(bcp_file, rdf_file):
     for row in parse_bcp(bcp_file):
         cls = "class:" + row[0]
         label = escape_string(row[1])
-        rdf_file.write('{} a ont:CharitablePurposeClass.'.format(cls))
-        rdf_file.write('{} rdfs:label "{}" .\n'.format(cls, label))
+        rdf_file.write('{} a ont:CharitablePurposeClass\n'.format(cls))
+        rdf_file.write('\t; rdfs:label "{}"\n'.format(cls, label))
+        rdf_file.write('\t.\n')
 
 
 def convert_financial(bcp_file, rdf_file):
@@ -489,12 +494,16 @@ def convert_financial(bcp_file, rdf_file):
         fystart = datetime_to_date_iri(row[1])
         fyend = datetime_to_date_iri(row[2])
         fyend_dt = parse_datetime(row[2])
+        fystart_timestamp = datetime_to_xsd_datetime(row[1])
+        fyend_timestamp = datetime_to_xsd_datetime(row[2])
         income = row[3]
         expenditure = row[4]
         summary_id = '<{}{}/financialSummary/{}>'.format(PREFIXES['charity'], row[0], fyend_dt.year)
         rdf_file.write('{} a ont:FinancialSummary\n'.format(summary_id))
         rdf_file.write('\t; ont:financialYearStart {}\n'.format(fystart))
+        rdf_file.write('\t; ont:financialYearStartTimestamp "{}"^^xsd:dateTime\n'.format(fystart_timestamp))
         rdf_file.write('\t; ont:financialYearEnd {}\n'.format(fyend))
+        rdf_file.write('\t; ont:financialYearEndTimestamp "{}"^^xsd:dateTime\n'.format(fyend_timestamp))
         rdf_file.write('\t; ont:income "{}"^^xsd:integer\n'.format(income))
         rdf_file.write('\t; ont:expenditure "{}"^^xsd:integer\n'.format(expenditure))
         rdf_file.write('\t.\n')
@@ -594,6 +603,8 @@ def convert_partb(bcp_file, rdf_file):
     for row in parse_bcp(bcp_file):
         return_id = '<{}{}/annualReturn/{}>'.format(PREFIXES['charity'], row[0], row[1])
         charity_id = charity_iri(row[0], '0')
+        fystart_dt = datetime_to_xsd_datetime(row[2], '%Y-%m-%d %H:%M:%S.%f')
+        fyend_dt = datetime_to_xsd_datetime(row[3], '%Y-%m-%d %H:%M:%S.%f')
         fystart = datetime_to_date_iri(row[2], '%Y-%m-%d %H:%M:%S.%f')
         fyend = datetime_to_date_iri(row[3], '%Y-%m-%d %H:%M:%S.%f')
         # Although the table schema says that all the remaining columns are varchar(max),
@@ -642,7 +653,9 @@ def convert_partb(bcp_file, rdf_file):
         rdf_file.write('{} a ont:AnnualReturn\n'.format(return_id))
         rdf_file.write('\t; ont:submittedBy {}\n'.format(charity_id))
         rdf_file.write('\t; ont:financialYearStart {}\n'.format(fystart))
+        rdf_file.write('\t; ont:financialYearStartTimestamp "{}"^^xsd:dateTime\n'.format(fystart_dt))
         rdf_file.write('\t; ont:financialYearEnd {}\n'.format(fyend))
+        rdf_file.write('\t; ont:financialYearEndTimestamp "{}"^^xsd:dateTime\n'.format(fyend_dt))
         for i in range(4, len(fin_stats) + 4):
             if row[i]:
                 rdf_file.write('\t; {} {}\n'.format(fin_stats[i-4], row[i]))
@@ -661,8 +674,10 @@ def convert_registration(bcp_file, rdf_file):
         rem_code = row[4]
         rdf_file.write('{} a ont:Charity\n'.format(charity_id))
         rdf_file.write('\t; ont:registrationDate {}\n'.format(reg_date))
+        rdf_file.write('\t; ont:registrationDateValue "{}"^^xsd:date\n'.format(reg_date))
         if rem_date is not None:
             rdf_file.write('\t; ont:removalDate {}\n'.format(rem_date))
+            rdf_file.write('\t; ont:removalDateValue "{}"^^xsd:date\n'.format(rem_date))
             if rem_code is not None:
                 rdf_file.write('\t; ont:removalReason rem:{}\n'.format(rem_code))
         rdf_file.write('\t.\n')
