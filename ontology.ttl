@@ -21,213 +21,215 @@
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/areaOfOperation
 
-ont:areaOfOperation rdf:type owl:ObjectProperty ;
-                    
-                    rdfs:comment "Relates a Charity to the Area within which they provide benefit."@en ;
-                    
-                    rdfs:range ont:Area ;
-                    
-                    rdfs:domain ont:Charity .
+:areaOfOperation rdf:type owl:ObjectProperty ;
+                 
+                 rdfs:comment "Relates a Charity to the Area within which they provide benefit."@en ;
+                 
+                 rdfs:range :Area ;
+                 
+                 rdfs:domain :Charity .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/charitablePurpose
 
-ont:charitablePurpose rdf:type owl:ObjectProperty ;
-                      
-                      rdfs:comment "Relates a Charity to its Charitable Puropse"@en ;
-                      
-                      rdfs:range ont:CharitablePurpose ;
-                      
-                      rdfs:domain ont:Charity .
+:charitablePurpose rdf:type owl:ObjectProperty ;
+                   
+                   rdfs:comment "Relates a Charity to its Charitable Puropse"@en ;
+                   
+                   rdfs:range :CharitablePurpose ;
+                   
+                   rdfs:domain :Charity .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/financialSummary
 
-ont:financialSummary rdf:type owl:ObjectProperty ;
-                     
-                     rdfs:comment "Relates a Charity to a Financial Summary for that charity."@en ;
-                     
-                     rdfs:domain ont:Charity ;
-                     
-                     rdfs:range ont:FinancialSummary .
+:financialSummary rdf:type owl:ObjectProperty ;
+                  
+                  rdfs:comment "Relates a Charity to a Financial Summary for that charity."@en ;
+                  
+                  rdfs:domain :Charity ;
+                  
+                  rdfs:range :FinancialSummary .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/financialYearEnd
 
-ont:financialYearEnd rdf:type owl:ObjectProperty ;
-                     
-                     rdfs:comment "Relates a Financial Summary or Annual Return to the Calendar Day that marks the end of the financial year it covers."@en ;
-                     
-                     rdfs:range <http://reference.data.gov.uk/def/intervals/CalendarDay> ;
-                     
-                     rdfs:domain [ rdf:type owl:Class ;
-                                   owl:unionOf ( ont:AnnualReturn
-                                                 ont:FinancialSummary
-                                               )
-                                 ] .
+:financialYearEnd rdf:type owl:ObjectProperty ;
+                  
+                  rdfs:comment "Relates a Financial Summary or Annual Return to the Calendar Day that marks the end of the financial year it covers."@en ;
+                  
+                  rdfs:range <http://reference.data.gov.uk/def/intervals/CalendarDay> ;
+                  
+                  rdfs:domain [ rdf:type owl:Class ;
+                                owl:unionOf ( :AnnualReturn
+                                              :FinancialSummary
+                                            )
+                              ] .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/financialYearStart
 
-ont:financialYearStart rdf:type owl:ObjectProperty ;
-                       
-                       rdfs:comment "Relates a Financial Summary or Annual Return to the Calendar Day that marks the start of the financial year covered."@en ;
-                       
-                       rdfs:range <http://reference.data.gov.uk/def/intervals/CalendarDay> ;
-                       
-                       rdfs:domain [ rdf:type owl:Class ;
-                                     owl:unionOf ( ont:AnnualReturn
-                                                   ont:FinancialSummary
-                                                 )
-                                   ] .
+:financialYearStart rdf:type owl:ObjectProperty ;
+                    
+                    rdfs:comment "Relates a Financial Summary or Annual Return to the Calendar Day that marks the start of the financial year covered."@en ;
+                    
+                    rdfs:range <http://reference.data.gov.uk/def/intervals/CalendarDay> ;
+                    
+                    rdfs:domain [ rdf:type owl:Class ;
+                                  owl:unionOf ( :AnnualReturn
+                                                :FinancialSummary
+                                              )
+                                ] .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/question
 
-ont:question rdf:type owl:ObjectProperty ;
-             
-             rdfs:comment "Relates a Summary Information Response to the Summary Information Question that it provides a response to."@en ;
-             
-             rdfs:range ont:SummaryInformationQuestion ;
-             
-             rdfs:domain ont:SummaryInformationResponse .
+:question rdf:type owl:ObjectProperty ;
+          
+          rdfs:comment "Relates a Summary Information Response to the Summary Information Question that it provides a response to."@en ;
+          
+          rdfs:range :SummaryInformationQuestion ;
+          
+          rdfs:domain :SummaryInformationResponse .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/registerStatus
 
-ont:registerStatus rdf:type owl:ObjectProperty ;
-                   
-                   rdfs:comment """Relates a Charity to its registration status.
+:registerStatus rdf:type owl:ObjectProperty ;
+                
+                rdfs:comment """Relates a Charity to its registration status.
 
 The resource http://data.networkedplanet.com/data/charity_commission/ontology/registerStatus/REGISTERED is used as the value of this property for charities whose current status is registered. The resource http://data.networkedplanet.com/data/charity_commission/ontology/registerStatus/REMOVED is used as the value of this property for charities that have been removed from the register."""@en ;
-                   
-                   rdfs:domain ont:Charity .
+                
+                rdfs:domain :Charity ;
+                
+                rdfs:range :RegisterStatus .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/registrationDate
 
-ont:registrationDate rdf:type owl:ObjectProperty ;
-                     
-                     rdfs:comment "Date of registration of a Charity."@en ;
-                     
-                     rdfs:domain ont:Charity ;
-                     
-                     rdfs:range <http://reference.data.gov.uk/def/intervals/CalendarDay> .
+:registrationDate rdf:type owl:ObjectProperty ;
+                  
+                  rdfs:comment "Date of registration of a Charity."@en ;
+                  
+                  rdfs:domain :Charity ;
+                  
+                  rdfs:range <http://reference.data.gov.uk/def/intervals/CalendarDay> .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/removalDate
 
-ont:removalDate rdf:type owl:ObjectProperty ;
-                
-                rdfs:comment "Date of removal of a Charity from the register"@en ;
-                
-                rdfs:domain ont:Charity ;
-                
-                rdfs:range <http://reference.data.gov.uk/def/intervals/CalendarDay> .
+:removalDate rdf:type owl:ObjectProperty ;
+             
+             rdfs:comment "Date of removal of a Charity from the register"@en ;
+             
+             rdfs:domain :Charity ;
+             
+             rdfs:range <http://reference.data.gov.uk/def/intervals/CalendarDay> .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/removalReason
 
-ont:removalReason rdf:type owl:ObjectProperty ;
-                  
-                  rdfs:comment "Relates a Charity that has been removed from the register to the reason for its removal."@en ;
-                  
-                  rdfs:domain ont:Charity ;
-                  
-                  rdfs:range ont:RemovalReason .
+:removalReason rdf:type owl:ObjectProperty ;
+               
+               rdfs:comment "Relates a Charity that has been removed from the register to the reason for its removal."@en ;
+               
+               rdfs:domain :Charity ;
+               
+               rdfs:range :RemovalReason .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/returnCycle
 
-ont:returnCycle rdf:type owl:ObjectProperty ;
-                
-                rdfs:comment "Relates a Finanal Accounts or Annual Return to the Return Cycle that the accounts or return apply to."@en ;
-                
-                rdfs:range ont:ReturnCycle ;
-                
-                rdfs:domain [ rdf:type owl:Class ;
-                              owl:unionOf ( ont:AnnualReturn
-                                            ont:FinancialAccounts
-                                          )
-                            ] .
+:returnCycle rdf:type owl:ObjectProperty ;
+             
+             rdfs:comment "Relates a Finanal Accounts or Annual Return to the Return Cycle that the accounts or return apply to."@en ;
+             
+             rdfs:range :ReturnCycle ;
+             
+             rdfs:domain [ rdf:type owl:Class ;
+                           owl:unionOf ( :AnnualReturn
+                                         :FinancialAccounts
+                                       )
+                         ] .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/sirCycle
 
-ont:sirCycle rdf:type owl:ObjectProperty ;
-             
-             rdfs:comment "Relates a Summary Information Return to the SIR Cycle period that the return is provided for."@en ;
-             
-             rdfs:range ont:SIRCycle ;
-             
-             rdfs:domain ont:SummaryInformationReturn .
+:sirCycle rdf:type owl:ObjectProperty ;
+          
+          rdfs:comment "Relates a Summary Information Return to the SIR Cycle period that the return is provided for."@en ;
+          
+          rdfs:range :SIRCycle ;
+          
+          rdfs:domain :SummaryInformationReturn .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/submissionDate
 
-ont:submissionDate rdf:type owl:ObjectProperty ;
-                   
-                   rdfs:comment "Relates an Accounts Submission or Annual Return Submission to the Interval that represents the day on which the submission was made."@en ;
-                   
-                   rdfs:range <http://reference.data.gov.uk/def/intervals/CalendarDay> ;
-                   
-                   rdfs:domain [ rdf:type owl:Class ;
-                                 owl:unionOf ( ont:AccountsSubmission
-                                               ont:AnnualReturnSubmission
-                                             )
-                               ] .
-
-
-
-###  http://data.networkedplanet.com/data/charity_commission/ontology/submittedAccounts
-
-ont:submittedAccounts rdf:type owl:ObjectProperty ;
-                      
-                      rdfs:comment "Relates an Accounts Submission to the Financial Accounts provided by the submission."@en ;
-                      
-                      rdfs:domain ont:AccountsSubmission ;
-                      
-                      rdfs:range ont:FinancialAccounts .
-
-
-
-###  http://data.networkedplanet.com/data/charity_commission/ontology/submittedBy
-
-ont:submittedBy rdf:type owl:ObjectProperty ;
+:submissionDate rdf:type owl:ObjectProperty ;
                 
-                rdfs:comment "Relates a Summary Information Return or Annual Return to the Charity that provided the return."@en ;
+                rdfs:comment "Relates an Accounts Submission or Annual Return Submission to the Interval that represents the day on which the submission was made."@en ;
                 
-                rdfs:range ont:Charity ;
+                rdfs:range <http://reference.data.gov.uk/def/intervals/CalendarDay> ;
                 
                 rdfs:domain [ rdf:type owl:Class ;
-                              owl:unionOf ( ont:AnnualReturn
-                                            ont:SummaryInformationReturn
+                              owl:unionOf ( :AccountsSubmission
+                                            :AnnualReturnSubmission
                                           )
                             ] .
 
 
 
+###  http://data.networkedplanet.com/data/charity_commission/ontology/submittedAccounts
+
+:submittedAccounts rdf:type owl:ObjectProperty ;
+                   
+                   rdfs:comment "Relates an Accounts Submission to the Financial Accounts provided by the submission."@en ;
+                   
+                   rdfs:domain :AccountsSubmission ;
+                   
+                   rdfs:range :FinancialAccounts .
+
+
+
+###  http://data.networkedplanet.com/data/charity_commission/ontology/submittedBy
+
+:submittedBy rdf:type owl:ObjectProperty ;
+             
+             rdfs:comment "Relates a Summary Information Return or Annual Return to the Charity that provided the return."@en ;
+             
+             rdfs:range :Charity ;
+             
+             rdfs:domain [ rdf:type owl:Class ;
+                           owl:unionOf ( :AnnualReturn
+                                         :SummaryInformationReturn
+                                       )
+                         ] .
+
+
+
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/submittedReturn
 
-ont:submittedReturn rdf:type owl:ObjectProperty ;
-                    
-                    rdfs:comment "Relates an Annual Return Submission to the Annual Return that was provided by the Charity."@en ;
-                    
-                    rdfs:range ont:AnnualReturn ;
-                    
-                    rdfs:domain ont:AnnualReturnSubmission .
+:submittedReturn rdf:type owl:ObjectProperty ;
+                 
+                 rdfs:comment "Relates an Annual Return Submission to the Annual Return that was provided by the Charity."@en ;
+                 
+                 rdfs:range :AnnualReturn ;
+                 
+                 rdfs:domain :AnnualReturnSubmission .
 
 
 
@@ -250,9 +252,9 @@ ont:submittedReturn rdf:type owl:ObjectProperty ;
                                      
                                      rdfs:comment "Relates an Area to an Area within which it is situated."@en ;
                                      
-                                     rdfs:domain ont:Area ;
+                                     rdfs:domain :Area ;
                                      
-                                     rdfs:range ont:Area .
+                                     rdfs:range :Area .
 
 
 
@@ -273,591 +275,663 @@ ont:submittedReturn rdf:type owl:ObjectProperty ;
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/activitiesGeneratingFunds
 
-ont:activitiesGeneratingFunds rdf:type owl:DatatypeProperty ;
-                              
-                              rdfs:comment "Activities Generating Funds"@en ;
-                              
-                              rdfs:subPropertyOf ont:incomeField .
+:activitiesGeneratingFunds rdf:type owl:DatatypeProperty ;
+                           
+                           rdfs:comment "Activities Generating Funds"@en ;
+                           
+                           rdfs:subPropertyOf :incomeField .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/annualReturnField
 
-ont:annualReturnField rdf:type owl:DatatypeProperty ;
-                      
-                      rdfs:comment "A field of reported information on an Annual Return"@en ;
-                      
-                      rdfs:domain ont:AnnualReturn ;
-                      
-                      rdfs:range xsd:integer .
+:annualReturnField rdf:type owl:DatatypeProperty ;
+                   
+                   rdfs:comment "A field of reported information on an Annual Return"@en ;
+                   
+                   rdfs:domain :AnnualReturn ;
+                   
+                   rdfs:range xsd:integer .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/areaOfBenefit
 
-ont:areaOfBenefit rdf:type owl:DatatypeProperty ;
-                  
-                  rdfs:comment "Text description of the area of benefit of a Charity."@en ;
-                  
-                  rdfs:domain ont:Charity ;
-                  
-                  rdfs:range xsd:string .
+:areaOfBenefit rdf:type owl:DatatypeProperty ;
+               
+               rdfs:comment "Text description of the area of benefit of a Charity."@en ;
+               
+               rdfs:domain :Charity ;
+               
+               rdfs:range xsd:string .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/assetGain
 
-ont:assetGain rdf:type owl:DatatypeProperty ;
-              
-              rdfs:comment "Revaluations of fixed assets"@en ;
-              
-              rdfs:subPropertyOf ont:gainField .
+:assetGain rdf:type owl:DatatypeProperty ;
+           
+           rdfs:comment "Revaluations of fixed assets"@en ;
+           
+           rdfs:subPropertyOf :gainField .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/balanceSheetField
 
-ont:balanceSheetField rdf:type owl:DatatypeProperty ;
-                      
-                      rdfs:subPropertyOf ont:annualReturnField .
+:balanceSheetField rdf:type owl:DatatypeProperty ;
+                   
+                   rdfs:subPropertyOf :annualReturnField .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/cashAssets
 
-ont:cashAssets rdf:type owl:DatatypeProperty ;
-               
-               rdfs:comment "Cash"@en ;
-               
-               rdfs:subPropertyOf ont:balanceSheetField .
+:cashAssets rdf:type owl:DatatypeProperty ;
+            
+            rdfs:comment "Cash"@en ;
+            
+            rdfs:subPropertyOf :balanceSheetField .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/charitableActivitiesCosts
 
-ont:charitableActivitiesCosts rdf:type owl:DatatypeProperty ;
-                              
-                              rdfs:comment "Charitable Activities costs"@en ;
-                              
-                              rdfs:subPropertyOf ont:expenditureField .
+:charitableActivitiesCosts rdf:type owl:DatatypeProperty ;
+                           
+                           rdfs:comment "Charitable Activities costs"@en ;
+                           
+                           rdfs:subPropertyOf :expenditureField .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/charitableActivitiesIncome
 
-ont:charitableActivitiesIncome rdf:type owl:DatatypeProperty ;
-                               
-                               rdfs:comment "Charitable activities"@en ;
-                               
-                               rdfs:subPropertyOf ont:incomeField .
+:charitableActivitiesIncome rdf:type owl:DatatypeProperty ;
+                            
+                            rdfs:comment "Charitable activities"@en ;
+                            
+                            rdfs:subPropertyOf :incomeField .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/charityOnlyAccounts
 
-ont:charityOnlyAccounts rdf:type owl:DatatypeProperty ;
-                        
-                        rdfs:comment "A boolean value that is true if the Annual Return provides charity-only acccounts."@en ;
-                        
-                        rdfs:domain ont:AnnualReturn ;
-                        
-                        rdfs:range xsd:boolean .
+:charityOnlyAccounts rdf:type owl:DatatypeProperty ;
+                     
+                     rdfs:comment "A boolean value that is true if the Annual Return provides charity-only acccounts."@en ;
+                     
+                     rdfs:domain :AnnualReturn ;
+                     
+                     rdfs:range xsd:boolean .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/consolidatedAccounts
 
-ont:consolidatedAccounts rdf:type owl:DatatypeProperty ;
-                         
-                         rdfs:comment "Boolean value that is true if the Annual Return provides consolidated accounts."@en ;
-                         
-                         rdfs:domain ont:AnnualReturn ;
-                         
-                         rdfs:range xsd:boolean .
+:consolidatedAccounts rdf:type owl:DatatypeProperty ;
+                      
+                      rdfs:comment "Boolean value that is true if the Annual Return provides consolidated accounts."@en ;
+                      
+                      rdfs:domain :AnnualReturn ;
+                      
+                      rdfs:range xsd:boolean .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/creditors
 
-ont:creditors rdf:type owl:DatatypeProperty ;
-              
-              rdfs:comment "Creditors - within one year"@en ;
-              
-              rdfs:subPropertyOf ont:balanceSheetField .
+:creditors rdf:type owl:DatatypeProperty ;
+           
+           rdfs:comment "Creditors - within one year"@en ;
+           
+           rdfs:subPropertyOf :balanceSheetField .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/currentAssets
 
-ont:currentAssets rdf:type owl:DatatypeProperty ;
-                  
-                  rdfs:comment "Total current assets"@en ;
-                  
-                  rdfs:subPropertyOf ont:balanceSheetField .
+:currentAssets rdf:type owl:DatatypeProperty ;
+               
+               rdfs:comment "Total current assets"@en ;
+               
+               rdfs:subPropertyOf :balanceSheetField .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/currentInvestmentAssets
 
-ont:currentInvestmentAssets rdf:type owl:DatatypeProperty ;
-                            
-                            rdfs:comment "Current Investment Assets"@en ;
-                            
-                            rdfs:subPropertyOf ont:balanceSheetField .
+:currentInvestmentAssets rdf:type owl:DatatypeProperty ;
+                         
+                         rdfs:comment "Current Investment Assets"@en ;
+                         
+                         rdfs:subPropertyOf :balanceSheetField .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/depreciation
 
-ont:depreciation rdf:type owl:DatatypeProperty ;
-                 
-                 rdfs:comment "Depreciation"@en ;
-                 
-                 rdfs:subPropertyOf ont:expenditureField .
+:depreciation rdf:type owl:DatatypeProperty ;
+              
+              rdfs:comment "Depreciation"@en ;
+              
+              rdfs:subPropertyOf :expenditureField .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/employees
 
-ont:employees rdf:type owl:DatatypeProperty ;
-              
-              rdfs:comment "Number of employees"@en ;
-              
-              rdfs:subPropertyOf ont:annualReturnField .
+:employees rdf:type owl:DatatypeProperty ;
+           
+           rdfs:comment "Number of employees"@en ;
+           
+           rdfs:subPropertyOf :annualReturnField .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/endowmentFunds
 
-ont:endowmentFunds rdf:type owl:DatatypeProperty ;
-                   
-                   rdfs:comment "Endowment Funds"@en ;
-                   
-                   rdfs:subPropertyOf ont:annualReturnField .
+:endowmentFunds rdf:type owl:DatatypeProperty ;
+                
+                rdfs:comment "Endowment Funds"@en ;
+                
+                rdfs:subPropertyOf :annualReturnField .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/endowmentsIncome
 
-ont:endowmentsIncome rdf:type owl:DatatypeProperty ;
-                     
-                     rdfs:comment "Endowments"@en ;
-                     
-                     rdfs:subPropertyOf ont:incomeField .
+:endowmentsIncome rdf:type owl:DatatypeProperty ;
+                  
+                  rdfs:comment "Endowments"@en ;
+                  
+                  rdfs:subPropertyOf :incomeField .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/expenditure
 
-ont:expenditure rdf:type owl:DatatypeProperty ;
-                
-                rdfs:comment "Total expenditure for a financial year as reported on a Financial Summary"@en ;
-                
-                rdfs:domain ont:FinancialSummary ;
-                
-                rdfs:range xsd:integer .
+:expenditure rdf:type owl:DatatypeProperty ;
+             
+             rdfs:comment "Total expenditure for a financial year as reported on a Financial Summary"@en ;
+             
+             rdfs:domain :FinancialSummary ;
+             
+             rdfs:range xsd:integer .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/expenditureField
 
-ont:expenditureField rdf:type owl:DatatypeProperty ;
-                     
-                     rdfs:subPropertyOf ont:annualReturnField .
+:expenditureField rdf:type owl:DatatypeProperty ;
+                  
+                  rdfs:subPropertyOf :annualReturnField .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/financialYearEndDayOfMonth
 
-ont:financialYearEndDayOfMonth rdf:type owl:DatatypeProperty ;
-                               
-                               rdfs:comment "The day of the month on which a charity's financial year ends."@en ;
-                               
-                               rdfs:domain ont:Charity ;
-                               
-                               rdfs:range xsd:integer .
+:financialYearEndDayOfMonth rdf:type owl:DatatypeProperty ;
+                            
+                            rdfs:comment "The day of the month on which a charity's financial year ends."@en ;
+                            
+                            rdfs:domain :Charity ;
+                            
+                            rdfs:range xsd:integer .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/financialYearEndMonthOfYear
 
-ont:financialYearEndMonthOfYear rdf:type owl:DatatypeProperty ;
-                                
-                                rdfs:comment "The month of the year on which a charity's financial year ends."@en ;
-                                
-                                rdfs:domain ont:Charity ;
-                                
-                                rdfs:range xsd:integer .
+:financialYearEndMonthOfYear rdf:type owl:DatatypeProperty ;
+                             
+                             rdfs:comment "The month of the year on which a charity's financial year ends."@en ;
+                             
+                             rdfs:domain :Charity ;
+                             
+                             rdfs:range xsd:integer .
+
+
+
+###  http://data.networkedplanet.com/data/charity_commission/ontology/financialYearEndTimestamp
+
+:financialYearEndTimestamp rdf:type owl:DatatypeProperty ;
+                           
+                           rdfs:comment "The end of a the period covered by a Financial Summary or an Annual Return provided as an XML Schema date/time value."@en ;
+                           
+                           rdfs:range xsd:dateTime ;
+                           
+                           rdfs:domain [ rdf:type owl:Class ;
+                                         owl:unionOf ( :AnnualReturn
+                                                       :FinancialSummary
+                                                     )
+                                       ] .
+
+
+
+###  http://data.networkedplanet.com/data/charity_commission/ontology/financialYearStartTimestamp
+
+:financialYearStartTimestamp rdf:type owl:DatatypeProperty ;
+                             
+                             rdfs:comment "The start of the period covered by a Financial Summary or Annual Return provided as an XML Schema date/time value."@en ;
+                             
+                             rdfs:range xsd:dateTime ;
+                             
+                             rdfs:domain [ rdf:type owl:Class ;
+                                           owl:unionOf ( :AnnualReturn
+                                                         :FinancialSummary
+                                                       )
+                                         ] .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/fixedAssets
 
-ont:fixedAssets rdf:type owl:DatatypeProperty ;
-                
-                rdfs:comment "Total Fixed assets"@en ;
-                
-                rdfs:subPropertyOf ont:balanceSheetField .
+:fixedAssets rdf:type owl:DatatypeProperty ;
+             
+             rdfs:comment "Total Fixed assets"@en ;
+             
+             rdfs:subPropertyOf :balanceSheetField .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/fixedAssetsYearStart
 
-ont:fixedAssetsYearStart rdf:type owl:DatatypeProperty ;
-                         
-                         rdfs:comment "Total fixed assets (start of year)"@en ;
-                         
-                         rdfs:subPropertyOf ont:balanceSheetField .
+:fixedAssetsYearStart rdf:type owl:DatatypeProperty ;
+                      
+                      rdfs:comment "Total fixed assets (start of year)"@en ;
+                      
+                      rdfs:subPropertyOf :balanceSheetField .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/fixedInvestmentsAssets
 
-ont:fixedInvestmentsAssets rdf:type owl:DatatypeProperty ;
-                           
-                           rdfs:comment "Fixed Investment Assets"@en ;
-                           
-                           rdfs:subPropertyOf ont:balanceSheetField .
+:fixedInvestmentsAssets rdf:type owl:DatatypeProperty ;
+                        
+                        rdfs:comment "Fixed Investment Assets"@en ;
+                        
+                        rdfs:subPropertyOf :balanceSheetField .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/fixedInvestmentsAssetsYearStart
 
-ont:fixedInvestmentsAssetsYearStart rdf:type owl:DatatypeProperty ;
-                                    
-                                    rdfs:comment "Fixed Investment Assets (start of year)"@en ;
-                                    
-                                    rdfs:subPropertyOf ont:balanceSheetField .
+:fixedInvestmentsAssetsYearStart rdf:type owl:DatatypeProperty ;
+                                 
+                                 rdfs:comment "Fixed Investment Assets (start of year)"@en ;
+                                 
+                                 rdfs:subPropertyOf :balanceSheetField .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/fundraisingTradingCosts
 
-ont:fundraisingTradingCosts rdf:type owl:DatatypeProperty ;
-                            
-                            rdfs:comment "Fundraising Trading costs"@en ;
-                            
-                            rdfs:subPropertyOf ont:expenditureField .
+:fundraisingTradingCosts rdf:type owl:DatatypeProperty ;
+                         
+                         rdfs:comment "Fundraising Trading costs"@en ;
+                         
+                         rdfs:subPropertyOf :expenditureField .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/gainField
 
-ont:gainField rdf:type owl:DatatypeProperty ;
-              
-              rdfs:subPropertyOf ont:annualReturnField .
+:gainField rdf:type owl:DatatypeProperty ;
+           
+           rdfs:subPropertyOf :annualReturnField .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/governanceCosts
 
-ont:governanceCosts rdf:type owl:DatatypeProperty ;
-                    
-                    rdfs:comment "Governance costs"@en ;
-                    
-                    rdfs:subPropertyOf ont:expenditureField .
+:governanceCosts rdf:type owl:DatatypeProperty ;
+                 
+                 rdfs:comment "Governance costs"@en ;
+                 
+                 rdfs:subPropertyOf :expenditureField .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/governingDocument
 
-ont:governingDocument rdf:type owl:DatatypeProperty ;
-                      
-                      rdfs:comment "Text description of the governing document of a Charity."@en ;
-                      
-                      rdfs:domain ont:Charity ;
-                      
-                      rdfs:range xsd:string .
+:governingDocument rdf:type owl:DatatypeProperty ;
+                   
+                   rdfs:comment "Text description of the governing document of a Charity."@en ;
+                   
+                   rdfs:domain :Charity ;
+                   
+                   rdfs:range xsd:string .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/grantsToInstitutions
 
-ont:grantsToInstitutions rdf:type owl:DatatypeProperty ;
-                         
-                         rdfs:comment "Grants to institutions"@en ;
-                         
-                         rdfs:subPropertyOf ont:expenditureField .
+:grantsToInstitutions rdf:type owl:DatatypeProperty ;
+                      
+                      rdfs:comment "Grants to institutions"@en ;
+                      
+                      rdfs:subPropertyOf :expenditureField .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/housingAssociationNumber
 
-ont:housingAssociationNumber rdf:type owl:DatatypeProperty ;
-                             
-                             rdfs:comment "The Housing Association number of a Charity"@en ;
-                             
-                             rdfs:domain ont:Charity ;
-                             
-                             rdfs:range xsd:string .
+:housingAssociationNumber rdf:type owl:DatatypeProperty ;
+                          
+                          rdfs:comment "The Housing Association number of a Charity"@en ;
+                          
+                          rdfs:domain :Charity ;
+                          
+                          rdfs:range xsd:string .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/income
 
-ont:income rdf:type owl:DatatypeProperty ;
-           
-           rdfs:comment "Total income for a financial year as reported on a Financial Summary"@en ;
-           
-           rdfs:domain ont:FinancialSummary ;
-           
-           rdfs:range xsd:integer .
+:income rdf:type owl:DatatypeProperty ;
+        
+        rdfs:comment "Total income for a financial year as reported on a Financial Summary"@en ;
+        
+        rdfs:domain :FinancialSummary ;
+        
+        rdfs:range xsd:integer .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/incomeField
 
-ont:incomeField rdf:type owl:DatatypeProperty ;
-                
-                rdfs:subPropertyOf ont:annualReturnField .
+:incomeField rdf:type owl:DatatypeProperty ;
+             
+             rdfs:subPropertyOf :annualReturnField .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/investmentGain
 
-ont:investmentGain rdf:type owl:DatatypeProperty ;
-                   
-                   rdfs:comment "Gain/loss on investments"@en ;
-                   
-                   rdfs:subPropertyOf ont:gainField .
+:investmentGain rdf:type owl:DatatypeProperty ;
+                
+                rdfs:comment "Gain/loss on investments"@en ;
+                
+                rdfs:subPropertyOf :gainField .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/investmentIncome
 
-ont:investmentIncome rdf:type owl:DatatypeProperty ;
-                     
-                     rdfs:comment "Investment income"@en ;
-                     
-                     rdfs:subPropertyOf ont:incomeField .
+:investmentIncome rdf:type owl:DatatypeProperty ;
+                  
+                  rdfs:comment "Investment income"@en ;
+                  
+                  rdfs:subPropertyOf :incomeField .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/investmentManagementCosts
 
-ont:investmentManagementCosts rdf:type owl:DatatypeProperty ;
-                              
-                              rdfs:comment "Investment Management costs"@en ;
-                              
-                              rdfs:subPropertyOf ont:expenditureField .
+:investmentManagementCosts rdf:type owl:DatatypeProperty ;
+                           
+                           rdfs:comment "Investment Management costs"@en ;
+                           
+                           rdfs:subPropertyOf :expenditureField .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/legaciesIncome
 
-ont:legaciesIncome rdf:type owl:DatatypeProperty ;
-                   
-                   rdfs:comment "Reported income from legacies"@en ;
-                   
-                   rdfs:subPropertyOf ont:incomeField .
+:legaciesIncome rdf:type owl:DatatypeProperty ;
+                
+                rdfs:comment "Reported income from legacies"@en ;
+                
+                rdfs:subPropertyOf :incomeField .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/longTermCreditors
 
-ont:longTermCreditors rdf:type owl:DatatypeProperty ;
-                      
-                      rdfs:comment "Creditors - Long Term / Provision"@en ;
-                      
-                      rdfs:subPropertyOf ont:balanceSheetField .
+:longTermCreditors rdf:type owl:DatatypeProperty ;
+                   
+                   rdfs:comment "Creditors - Long Term / Provision"@en ;
+                   
+                   rdfs:subPropertyOf :balanceSheetField .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/objective
 
-ont:objective rdf:type owl:DatatypeProperty ;
-              
-              rdfs:comment "A text description of the objective(s) of a Charity"@en ;
-              
-              rdfs:domain ont:Charity ;
-              
-              rdfs:range xsd:string .
+:objective rdf:type owl:DatatypeProperty ;
+           
+           rdfs:comment "A text description of the objective(s) of a Charity"@en ;
+           
+           rdfs:domain :Charity ;
+           
+           rdfs:range xsd:string .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/otherExpenditure
 
-ont:otherExpenditure rdf:type owl:DatatypeProperty ;
-                     
-                     rdfs:comment "Other resources expended"@en ;
-                     
-                     rdfs:subPropertyOf ont:expenditureField .
+:otherExpenditure rdf:type owl:DatatypeProperty ;
+                  
+                  rdfs:comment "Other resources expended"@en ;
+                  
+                  rdfs:subPropertyOf :expenditureField .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/otherIncome
 
-ont:otherIncome rdf:type owl:DatatypeProperty ;
-                
-                rdfs:comment "Other income"@en ;
-                
-                rdfs:subPropertyOf ont:incomeField .
+:otherIncome rdf:type owl:DatatypeProperty ;
+             
+             rdfs:comment "Other income"@en ;
+             
+             rdfs:subPropertyOf :incomeField .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/pensionAssets
 
-ont:pensionAssets rdf:type owl:DatatypeProperty ;
-                  
-                  rdfs:comment "Pension Assets / Liabilities"@en ;
-                  
-                  rdfs:subPropertyOf ont:balanceSheetField .
+:pensionAssets rdf:type owl:DatatypeProperty ;
+               
+               rdfs:comment "Pension Assets / Liabilities"@en ;
+               
+               rdfs:subPropertyOf :balanceSheetField .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/pensionGain
 
-ont:pensionGain rdf:type owl:DatatypeProperty ;
-                
-                rdfs:comment "Gain/Loss on Pension Fund"@en ;
-                
-                rdfs:subPropertyOf ont:gainField .
+:pensionGain rdf:type owl:DatatypeProperty ;
+             
+             rdfs:comment "Gain/Loss on Pension Fund"@en ;
+             
+             rdfs:subPropertyOf :gainField .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/questionText
 
-ont:questionText rdf:type owl:DatatypeProperty ;
-                 
-                 rdfs:comment "The text of a Summary Information Question"@en ;
-                 
-                 rdfs:domain ont:SummaryInformationQuestion ;
-                 
-                 rdfs:range xsd:string .
+:questionText rdf:type owl:DatatypeProperty ;
+              
+              rdfs:comment "The text of a Summary Information Question"@en ;
+              
+              rdfs:domain :SummaryInformationQuestion ;
+              
+              rdfs:range xsd:string .
+
+
+
+###  http://data.networkedplanet.com/data/charity_commission/ontology/registrationDateTimestamp
+
+:registrationDateTimestamp rdf:type owl:DatatypeProperty ;
+                           
+                           rdfs:comment "The date of registration of a Charity provided as an XML Schema date/time value."@en ;
+                           
+                           rdfs:domain :Charity ;
+                           
+                           rdfs:range xsd:dateTime .
+
+
+
+###  http://data.networkedplanet.com/data/charity_commission/ontology/removalDateTimestamp
+
+:removalDateTimestamp rdf:type owl:DatatypeProperty ;
+                      
+                      rdfs:comment "The date of removal of a Charity from the register provided as an XML Schema date/time value."@en ;
+                      
+                      rdfs:domain :Charity ;
+                      
+                      rdfs:range xsd:dateTime .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/reserves
 
-ont:reserves rdf:type owl:DatatypeProperty ;
-             
-             rdfs:comment "Reserves"@en ;
-             
-             rdfs:subPropertyOf ont:balanceSheetField .
+:reserves rdf:type owl:DatatypeProperty ;
+          
+          rdfs:comment "Reserves"@en ;
+          
+          rdfs:subPropertyOf :balanceSheetField .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/responseText
 
-ont:responseText rdf:type owl:DatatypeProperty ;
-                 
-                 rdfs:comment "Provides the text content of a Summary Information Response"@en ;
-                 
-                 rdfs:domain ont:SummaryInformationResponse ;
-                 
-                 rdfs:range xsd:string .
+:responseText rdf:type owl:DatatypeProperty ;
+              
+              rdfs:comment "Provides the text content of a Summary Information Response"@en ;
+              
+              rdfs:domain :SummaryInformationResponse ;
+              
+              rdfs:range xsd:string .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/restrictedFunds
 
-ont:restrictedFunds rdf:type owl:DatatypeProperty ;
-                    
-                    rdfs:comment "Restricted Funds"@en ;
-                    
-                    rdfs:subPropertyOf ont:annualReturnField .
+:restrictedFunds rdf:type owl:DatatypeProperty ;
+                 
+                 rdfs:comment "Restricted Funds"@en ;
+                 
+                 rdfs:subPropertyOf :annualReturnField .
+
+
+
+###  http://data.networkedplanet.com/data/charity_commission/ontology/submissionTimestamp
+
+:submissionTimestamp rdf:type owl:DatatypeProperty ;
+                     
+                     rdfs:comment "The date of an Accounts Submission or Annual Return Submission provided as an XML Schema date/time value."@en ;
+                     
+                     rdfs:range xsd:dateTime ;
+                     
+                     rdfs:domain [ rdf:type owl:Class ;
+                                   owl:unionOf ( :AccountsSubmission
+                                                 :AnnualReturnSubmission
+                                               )
+                                 ] .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/supportCosts
 
-ont:supportCosts rdf:type owl:DatatypeProperty ;
-                 
-                 rdfs:comment "Support Costs"@en ;
-                 
-                 rdfs:subPropertyOf ont:expenditureField .
+:supportCosts rdf:type owl:DatatypeProperty ;
+              
+              rdfs:comment "Support Costs"@en ;
+              
+              rdfs:subPropertyOf :expenditureField .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/totalAssets
 
-ont:totalAssets rdf:type owl:DatatypeProperty ;
-                
-                rdfs:comment "Total Net Assets/Liabilities"@en ;
-                
-                rdfs:subPropertyOf ont:annualReturnField .
+:totalAssets rdf:type owl:DatatypeProperty ;
+             
+             rdfs:comment "Total Net Assets/Liabilities"@en ;
+             
+             rdfs:subPropertyOf :annualReturnField .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/totalExpenditure
 
-ont:totalExpenditure rdf:type owl:DatatypeProperty ;
-                     
-                     rdfs:comment "Total resources expended"@en ;
-                     
-                     rdfs:subPropertyOf ont:annualReturnField .
+:totalExpenditure rdf:type owl:DatatypeProperty ;
+                  
+                  rdfs:comment "Total resources expended"@en ;
+                  
+                  rdfs:subPropertyOf :annualReturnField .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/totalFunds
 
-ont:totalFunds rdf:type owl:DatatypeProperty ;
-               
-               rdfs:comment "Total funds"@en ;
-               
-               rdfs:subPropertyOf ont:annualReturnField .
+:totalFunds rdf:type owl:DatatypeProperty ;
+            
+            rdfs:comment "Total funds"@en ;
+            
+            rdfs:subPropertyOf :annualReturnField .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/totalIncome
 
-ont:totalIncome rdf:type owl:DatatypeProperty ;
-                
-                rdfs:comment "Total incoming resources"@en ;
-                
-                rdfs:subPropertyOf ont:annualReturnField .
+:totalIncome rdf:type owl:DatatypeProperty ;
+             
+             rdfs:comment "Total incoming resources"@en ;
+             
+             rdfs:subPropertyOf :annualReturnField .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/trustee
 
-ont:trustee rdf:type owl:DatatypeProperty ;
-            
-            rdfs:comment "The name of a trustee of the charity."@en ;
-            
-            rdfs:domain ont:Charity ;
-            
-            rdfs:range xsd:string .
+:trustee rdf:type owl:DatatypeProperty ;
+         
+         rdfs:comment "The name of a trustee of the charity."@en ;
+         
+         rdfs:domain :Charity ;
+         
+         rdfs:range xsd:string .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/unrestrictedFunds
 
-ont:unrestrictedFunds rdf:type owl:DatatypeProperty ;
-                      
-                      rdfs:comment "Unrestricted Funds"@en ;
-                      
-                      rdfs:subPropertyOf ont:annualReturnField .
+:unrestrictedFunds rdf:type owl:DatatypeProperty ;
+                   
+                   rdfs:comment "Unrestricted Funds"@en ;
+                   
+                   rdfs:subPropertyOf :annualReturnField .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/voluntaryIncome
 
-ont:voluntaryIncome rdf:type owl:DatatypeProperty ;
-                    
-                    rdfs:comment "Voluntary Income"@en ;
-                    
-                    rdfs:subPropertyOf ont:incomeField .
+:voluntaryIncome rdf:type owl:DatatypeProperty ;
+                 
+                 rdfs:comment "Voluntary Income"@en ;
+                 
+                 rdfs:subPropertyOf :incomeField .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/voluntaryIncomeCosts
 
-ont:voluntaryIncomeCosts rdf:type owl:DatatypeProperty ;
-                         
-                         rdfs:comment "Voluntary Income costs"@en ;
-                         
-                         rdfs:subPropertyOf ont:expenditureField .
+:voluntaryIncomeCosts rdf:type owl:DatatypeProperty ;
+                      
+                      rdfs:comment "Voluntary Income costs"@en ;
+                      
+                      rdfs:subPropertyOf :expenditureField .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/volunteers
 
-ont:volunteers rdf:type owl:DatatypeProperty ;
-               
-               rdfs:comment "Number of volunteers"@en ;
-               
-               rdfs:subPropertyOf ont:annualReturnField .
+:volunteers rdf:type owl:DatatypeProperty ;
+            
+            rdfs:comment "Number of volunteers"@en ;
+            
+            rdfs:subPropertyOf :annualReturnField .
 
 
 
@@ -866,7 +940,7 @@ ont:volunteers rdf:type owl:DatatypeProperty ;
 <http://schema.org/name> rdf:type owl:DatatypeProperty ;
                          
                          rdfs:domain [ rdf:type owl:Class ;
-                                       owl:unionOf ( ont:Area
+                                       owl:unionOf ( :Area
                                                      <http://schema.org/Organization>
                                                    )
                                      ] .
@@ -890,119 +964,125 @@ ont:volunteers rdf:type owl:DatatypeProperty ;
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/AccountsSubmission
 
-ont:AccountsSubmission rdf:type owl:Class ;
-                       
-                       rdfs:comment "The submission of an annual accounts statement from a Charity"@en .
+:AccountsSubmission rdf:type owl:Class ;
+                    
+                    rdfs:comment "The submission of an annual accounts statement from a Charity"@en .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/AnnualReturn
 
-ont:AnnualReturn rdf:type owl:Class ;
-                 
-                 rdfs:comment "An Annual Return provided by a Charity"@en .
+:AnnualReturn rdf:type owl:Class ;
+              
+              rdfs:comment "An Annual Return provided by a Charity"@en .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/AnnualReturnSubmission
 
-ont:AnnualReturnSubmission rdf:type owl:Class ;
-                           
-                           rdfs:comment "The submission of Annual Return information from a Charity for a specific Return Cycle."@en .
+:AnnualReturnSubmission rdf:type owl:Class ;
+                        
+                        rdfs:comment "The submission of Annual Return information from a Charity for a specific Return Cycle."@en .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/Area
 
-ont:Area rdf:type owl:Class ;
-         
-         rdfs:comment "A geographical or political region within which a Charity opertates."@en .
+:Area rdf:type owl:Class ;
+      
+      rdfs:comment "A geographical or political region within which a Charity opertates."@en .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/CharitablePurpose
 
-ont:CharitablePurpose rdf:type owl:Class .
+:CharitablePurpose rdf:type owl:Class .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/Charity
 
-ont:Charity rdf:type owl:Class ;
-            
-            rdfs:subClassOf <http://schema.org/Organization> .
+:Charity rdf:type owl:Class ;
+         
+         rdfs:subClassOf <http://schema.org/Organization> .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/FinancialAccounts
 
-ont:FinancialAccounts rdf:type owl:Class ;
-                      
-                      rdfs:comment "The annual accounts information provided by a Charity on an Accounts Submission."@en .
+:FinancialAccounts rdf:type owl:Class ;
+                   
+                   rdfs:comment "The annual accounts information provided by a Charity on an Accounts Submission."@en .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/FinancialSummary
 
-ont:FinancialSummary rdf:type owl:Class ;
-                     
-                     rdfs:comment "A summary of a charity's income and expenditure for a particular financial year."@en .
+:FinancialSummary rdf:type owl:Class ;
+                  
+                  rdfs:comment "A summary of a charity's income and expenditure for a particular financial year."@en .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/NhsCharity
 
-ont:NhsCharity rdf:type owl:Class ;
-               
-               rdfs:subClassOf ont:Charity ;
-               
-               rdfs:comment "A charity which is also recorded by the Charity Commission as being an NHS charity."@en .
+:NhsCharity rdf:type owl:Class ;
+            
+            rdfs:subClassOf :Charity ;
+            
+            rdfs:comment "A charity which is also recorded by the Charity Commission as being an NHS charity."@en .
+
+
+
+###  http://data.networkedplanet.com/data/charity_commission/ontology/RegisterStatus
+
+:RegisterStatus rdf:type owl:Class .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/RemovalReason
 
-ont:RemovalReason rdf:type owl:Class ;
-                  
-                  rdfs:comment "Category of reason for the removal of a Charity from the register."@en .
+:RemovalReason rdf:type owl:Class ;
+               
+               rdfs:comment "Category of reason for the removal of a Charity from the register."@en .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/ReturnCycle
 
-ont:ReturnCycle rdf:type owl:Class ;
-                
-                rdfs:comment "An annual period for the receipt of returns information from charities."@en .
+:ReturnCycle rdf:type owl:Class ;
+             
+             rdfs:comment "An annual period for the receipt of returns information from charities."@en .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/SIRCycle
 
-ont:SIRCycle rdf:type owl:Class ;
-             
-             rdfs:comment "An annual period for the collection of Summary Information Return information from charities. Each SIR received from a charity will belong to one SIR Cycle."@en .
+:SIRCycle rdf:type owl:Class ;
+          
+          rdfs:comment "An annual period for the collection of Summary Information Return information from charities. Each SIR received from a charity will belong to one SIR Cycle."@en .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/SummaryInformationQuestion
 
-ont:SummaryInformationQuestion rdf:type owl:Class ;
-                               
-                               rdfs:comment "A question on a Summary Information Return form."@en .
+:SummaryInformationQuestion rdf:type owl:Class ;
+                            
+                            rdfs:comment "A question on a Summary Information Return form."@en .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/SummaryInformationResponse
 
-ont:SummaryInformationResponse rdf:type owl:Class ;
-                               
-                               rdfs:comment "A response provided by a Charity to a Summary Information Question on a Summary Information Return."@en .
+:SummaryInformationResponse rdf:type owl:Class ;
+                            
+                            rdfs:comment "A response provided by a Charity to a Summary Information Question on a Summary Information Return."@en .
 
 
 
 ###  http://data.networkedplanet.com/data/charity_commission/ontology/SummaryInformationReturn
 
-ont:SummaryInformationReturn rdf:type owl:Class .
+:SummaryInformationReturn rdf:type owl:Class .
 
 
 
@@ -1019,6 +1099,33 @@ ont:SummaryInformationReturn rdf:type owl:Class .
                                                rdfs:subClassOf <http://schema.org/Organization> ;
                                                
                                                rdfs:comment "A charity that also has a Housing Association number registered with the Charity Commission."@en .
+
+
+
+
+
+#################################################################
+#
+#    Individuals
+#
+#################################################################
+
+
+###  http://data.networkedplanet.com/data/charity_commission/ontology/registerStatus/REGISTERED
+
+<http://data.networkedplanet.com/data/charity_commission/ontology/registerStatus/REGISTERED> rdf:type :RegisterStatus ,
+                                                                                                      owl:NamedIndividual ;
+                                                                                             
+                                                                                             rdfs:label "Registered"@en .
+
+
+
+###  http://data.networkedplanet.com/data/charity_commission/ontology/registerStatus/REMOVED
+
+<http://data.networkedplanet.com/data/charity_commission/ontology/registerStatus/REMOVED> rdf:type :RegisterStatus ,
+                                                                                                   owl:NamedIndividual ;
+                                                                                          
+                                                                                          rdfs:label "Removed"@en .
 
 
 
