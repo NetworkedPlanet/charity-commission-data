@@ -670,14 +670,16 @@ def convert_registration(bcp_file, rdf_file):
     for row in parse_bcp(bcp_file):
         charity_id = charity_iri(row[0], row[1])
         reg_date = datetime_to_date_iri(row[2])
+        reg_date_dt = datetime_to_xsd_datetime(row[2])
         rem_date = datetime_to_date_iri(row[3]) if row[3] else None
+        rem_date_dt = datetime_to_xsd_datetime(row[3]) if row[3] else None
         rem_code = row[4]
         rdf_file.write('{} a ont:Charity\n'.format(charity_id))
         rdf_file.write('\t; ont:registrationDate {}\n'.format(reg_date))
-        rdf_file.write('\t; ont:registrationDateValue "{}"^^xsd:date\n'.format(reg_date))
+        rdf_file.write('\t; ont:registrationDateTimestamp "{}"^^xsd:dateTime\n'.format(reg_date_dt))
         if rem_date is not None:
             rdf_file.write('\t; ont:removalDate {}\n'.format(rem_date))
-            rdf_file.write('\t; ont:removalDateValue "{}"^^xsd:date\n'.format(rem_date))
+            rdf_file.write('\t; ont:removalDateTimestamp "{}"^^xsd:dateTime\n'.format(rem_date_dt))
             if rem_code is not None:
                 rdf_file.write('\t; ont:removalReason rem:{}\n'.format(rem_code))
         rdf_file.write('\t.\n')
